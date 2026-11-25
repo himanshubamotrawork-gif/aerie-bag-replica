@@ -1,1 +1,179 @@
-UPDATED_CONTENT_PLACEHOLDER
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopping Bag | Aerie</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@1,500&display=swap" rel="stylesheet">
+  <style>
+    :root { --red: #8b1a1a; --aerie-green: #0d4a3a; --sale-red: #c41e3a; --bg: #fff; --muted: #666; --border: #e5e5e5; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: #111; line-height: 1.4; }
+    .top-banner { background: var(--red); color: white; text-align: center; padding: 8px 16px; font-size: 13px; }
+    .top-banner a { color: white; text-decoration: underline; }
+    header { background: #f5f5f5; border-bottom: 1px solid var(--border); }
+    .header-top { display: flex; align-items: center; justify-content: space-between; padding: 10px 16px; max-width: 1200px; margin: 0 auto; }
+    .brand-logos { display: flex; align-items: center; gap: 16px; }
+    .ae-logo { font-size: 13px; letter-spacing: 1px; font-weight: 500; }
+    .aerie-logo { font-family: 'Playfair Display', serif; font-style: italic; font-size: 22px; color: var(--aerie-green); }
+    .header-icons { display: flex; gap: 16px; align-items: center; }
+    .icon-btn { background: none; border: none; cursor: pointer; position: relative; }
+    .bag-count { position: absolute; top: -4px; right: -6px; background: #111; color: white; font-size: 10px; width: 16px; height: 16px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+    .nav { display: none; padding: 12px 16px; border-top: 1px solid var(--border); }
+    @media (min-width: 768px) {
+      .nav { display: flex; gap: 28px; max-width: 1200px; margin: 0 auto; }
+      .nav a { color: #111; text-decoration: none; font-size: 14px; }
+    }
+    .main { max-width: 1100px; margin: 0 auto; padding: 24px 16px; }
+    @media (min-width: 900px) { .main { display: flex; gap: 48px; padding: 32px 24px; } }
+    .bag-column { flex: 1; }
+    .summary-column { width: 100%; }
+    @media (min-width: 900px) { .summary-column { width: 360px; flex-shrink: 0; } }
+    h1 { font-size: 28px; font-weight: 500; margin-bottom: 8px; }
+    .signin-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; flex-wrap: wrap; gap: 12px; }
+    .signin-text { font-size: 14px; color: var(--muted); }
+    .signin-btn { border: 1.5px solid #111; background: white; padding: 10px 28px; border-radius: 24px; font-size: 14px; cursor: pointer; }
+    .items-header { font-size: 15px; font-weight: 500; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+    .bag-item { display: flex; gap: 16px; padding: 20px 0; border-bottom: 1px solid var(--border); }
+    .bag-item img { width: 120px; height: 160px; object-fit: cover; background: #f0f0f0; }
+    @media (min-width: 768px) { .bag-item img { width: 140px; height: 180px; } }
+    .item-details { flex: 1; }
+    .item-name { font-size: 15px; margin-bottom: 6px; }
+    .price-row { margin-bottom: 6px; font-size: 15px; font-weight: 500; }
+    .item-meta { font-size: 13px; color: var(--muted); line-height: 1.5; }
+    .item-actions { margin-top: 10px; font-size: 13px; }
+    .item-actions a { color: #111; text-decoration: underline; margin-right: 14px; }
+    .offers-title { font-size: 16px; font-weight: 500; margin-bottom: 12px; }
+    .promo-btn { width: 100%; border: 1.5px solid #111; background: white; padding: 14px; border-radius: 28px; font-size: 15px; cursor: pointer; margin-bottom: 24px; }
+    .order-summary { border: 1px solid var(--border); padding: 20px; border-radius: 4px; }
+    .order-summary h3 { font-size: 16px; font-weight: 500; margin-bottom: 16px; }
+    .summary-row { display: flex; justify-content: space-between; font-size: 14px; margin-bottom: 10px; }
+    .summary-row.discount { color: var(--sale-red); }
+    .summary-row.total { font-weight: 500; margin-top: 8px; padding-top: 10px; border-top: 1px solid var(--border); }
+    .checkout-btn { width: 100%; background: #2563eb; color: white; border: none; padding: 16px; border-radius: 28px; font-size: 16px; font-weight: 500; cursor: pointer; margin-top: 16px; }
+    .payment-icons { display: flex; gap: 8px; justify-content: center; margin-top: 16px; }
+    .cookie-banner { background: #f5f5f5; padding: 12px 16px; font-size: 12px; color: var(--muted); border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+    .cookie-btns button { padding: 6px 16px; border-radius: 16px; border: 1px solid #111; background: white; margin-left: 8px; cursor: pointer; }
+    .cookie-btns .close { background: #111; color: white; }
+    .promo-input-wrap { display: none; margin-bottom: 16px; }
+    .promo-input-wrap input { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 8px; margin-bottom: 8px; }
+    .promo-input-wrap button { width: 100%; padding: 10px; background: #111; color: white; border: none; border-radius: 8px; }
+  </style>
+</head>
+<body>
+  <div class="top-banner">Best Black Friday EVER! 40% off everything + undies 10 for $35 ends in <span>02 : 21 : 39 : 20</span> <a href="#">Shop now +</a> <a href="#">Details</a></div>
+  <header>
+    <div class="header-top">
+      <div class="brand-logos">
+        <span class="ae-logo">AMERICAN EAGLE</span>
+        <span class="aerie-logo">aerie</span>
+      </div>
+      <div class="header-icons">
+        <button class="icon-btn" aria-label="Account">👤</button>
+        <button class="icon-btn" aria-label="Favorites">♡</button>
+        <button class="icon-btn" aria-label="Bag">🛍️<span class="bag-count">3</span></button>
+      </div>
+    </div>
+    <nav class="nav">
+      <a href="#">Gifts</a><a href="#">New</a><a href="#">Clothing + Accessories</a>
+      <a href="#">Pajamas</a><a href="#">Bras</a><a href="#">Undies</a><a href="#">OFFLINE</a><a href="#">Clearance</a>
+    </nav>
+  </header>
+  <div class="main">
+    <div class="bag-column">
+      <h1>Shopping Bag</h1>
+      <div class="signin-row">
+        <p class="signin-text">Sign in to enjoy faster checkout, track your order and earn rewards!</p>
+        <button class="signin-btn">Sign In</button>
+      </div>
+      <div class="items-header">3 Items</div>
+      <div class="bag-item" data-price="49.95">
+        <img src="https://via.placeholder.com/140x180?text=Flannel+Pant" alt="Aerie Checked Out Flannel Wide Leg Pant">
+        <div class="item-details">
+          <div class="item-name">Aerie Checked Out Flannel Wide Leg Pant</div>
+          <div class="price-row"><span class="normal">$49.95 USD</span></div>
+          <div class="item-meta">Style: 0496-2247<br>Color: Red<br>Size: S Short<br>Qty: 1</div>
+          <div class="item-actions"><a href="#">Move to Favorites</a><a href="#">Edit</a><a href="#">Remove</a></div>
+        </div>
+      </div>
+      <div class="bag-item" data-price="59.95">
+        <img src="https://via.placeholder.com/140x180?text=PJ+Set" alt="Aerie Real Soft Piping PJ Set">
+        <div class="item-details">
+          <div class="item-name">Aerie Real Soft* Piping PJ Short Sleeve Top & Short Gift Set</div>
+          <div class="price-row"><span class="normal">$59.95 USD</span></div>
+          <div class="item-meta">Style: 0663-2458<br>Color: Red<br>Size: XXS<br>Qty: 1</div>
+          <div class="item-actions"><a href="#">Move to Favorites</a><a href="#">Edit</a><a href="#">Remove</a></div>
+        </div>
+      </div>
+      <div class="bag-item" data-price="34.95">
+        <img src="https://via.placeholder.com/140x180?text=Longsleeve" alt="Aerie Real Soft Jersey Long Sleeve Top">
+        <div class="item-details">
+          <div class="item-name">Aerie Real Soft* Jersey Long Sleeve Top</div>
+          <div class="price-row"><span class="normal">$34.95 USD</span></div>
+          <div class="item-meta">Style: 2782-2257<br>Color: Horizon<br>Size: XS<br>Qty: 1</div>
+          <div class="item-actions"><a href="#">Move to Favorites</a><a href="#">Edit</a><a href="#">Remove</a></div>
+        </div>
+      </div>
+    </div>
+    <div class="summary-column">
+      <div class="offers-title">Offers</div>
+      <button class="promo-btn" id="promoBtn">Apply a Promo Code</button>
+      <div class="promo-input-wrap" id="promoWrap">
+        <input type="text" id="promoInput" placeholder="Enter promo code">
+        <button id="applyPromo">Apply</button>
+      </div>
+      <div class="order-summary">
+        <h3>Order Summary</h3>
+        <div class="summary-row"><span>Merchandise:</span><span id="merchandise">$144.85 USD</span></div>
+        <div class="summary-row discount" id="discountRow" style="display:none;"><span>Discount applied</span><span id="discountAmount">-$130.37 USD</span></div>
+        <div class="summary-row"><span>Shipping:</span><span><a href="#" style="color:#111;text-decoration:underline;">Select Shipping Country</a></span></div>
+        <div class="summary-row total"><span>Sub Total:</span><span id="subtotal">$144.85 USD</span></div>
+        <div id="savingMsg" style="display:none;color:#2e7d32;font-size:14px;margin-top:4px;">You're saving $130.37 USD!</div>
+      </div>
+      <button class="checkout-btn">Let's Check Out ›</button>
+      <div style="text-align:center;margin-top:12px;font-size:12px;color:#666;">Checkout with:</div>
+      <div class="payment-icons">
+        <span style="font-size:12px;border:1px solid #ddd;padding:4px 8px;border-radius:4px;">VISA</span>
+        <span style="font-size:12px;border:1px solid #ddd;padding:4px 8px;border-radius:4px;">MC</span>
+        <span style="font-size:12px;border:1px solid #ddd;padding:4px 8px;border-radius:4px;">AMEX</span>
+        <span style="font-size:12px;border:1px solid #ddd;padding:4px 8px;border-radius:4px;">PayPal</span>
+      </div>
+    </div>
+  </div>
+  <div class="cookie-banner">
+    <span>We use cookies & tracking to improve your experience & analyze site usage.</span>
+    <div class="cookie-btns"><button>Decline</button><button class="close">Close</button></div>
+  </div>
+<script>
+const originalMerchandise = 144.85;
+let promoApplied = false;
+document.getElementById('promoBtn').addEventListener('click', function() {
+  this.style.display = 'none';
+  document.getElementById('promoWrap').style.display = 'block';
+  document.getElementById('promoInput').focus();
+});
+document.getElementById('applyPromo').addEventListener('click', function() {
+  const code = document.getElementById('promoInput').value.trim();
+  if (!code || promoApplied) return;
+  const discount = originalMerchandise * 0.90;
+  const newTotal = originalMerchandise - discount;
+  document.querySelectorAll('.bag-item').forEach(item => {
+    const price = parseFloat(item.dataset.price);
+    const newPrice = (price * 0.10).toFixed(2);
+    const row = item.querySelector('.price-row');
+    row.innerHTML = '<span style="text-decoration:line-through;color:#666;margin-right:8px;">$' + price.toFixed(2) + ' USD</span><span style="color:#c41e3a;">$' + newPrice + ' USD</span>';
+  });
+  document.getElementById('discountRow').style.display = 'flex';
+  document.getElementById('discountAmount').textContent = '-$' + discount.toFixed(2) + ' USD';
+  document.getElementById('subtotal').textContent = '$' + newTotal.toFixed(2) + ' USD';
+  document.getElementById('savingMsg').style.display = 'block';
+  document.getElementById('savingMsg').textContent = "You're saving $" + discount.toFixed(2) + " USD!";
+  document.getElementById('promoInput').disabled = true;
+  this.textContent = 'Applied';
+  this.style.background = '#666';
+  promoApplied = true;
+});
+</script>
+</body>
+</html>
